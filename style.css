@@ -1,0 +1,89 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Oswald", sans-serif;
+  color: black;
+}
+
+.logo {
+  font-size: 50px;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  padding: 30px 50px 30px;
+  margin: 0px 50px 0px;
+  border-bottom: 5px solid black;
+}
+
+.navigation ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+}
+
+.navigation ul li a:hover {
+  text-decoration: underline;
+}
+
+main {
+  margin: 0px 50px 0px;
+  background-color: white;
+  margin-bottom: 100px;
+}
+
+.weather {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  height: 150px;
+  border-bottom: 5px solid black;
+}
+
+.news {
+  display: flex;
+}
+
+.other-news {
+  display: flex;
+}
+
+.content {
+  display: flex;
+  margin-top: 50px;
+  height: 100%;
+}
+
+.primary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  border-right: 5px solid black;
+  padding: 10px 20px 10px;
+  width: 70%;
+}
+
+.secondary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 30%;
+  padding: 10px 20px 10px;
+}
+
+footer {
+  height: 300px;
+  margin: 0px 50px 0px;
+  padding: 20px;
+  background-color: black;
+  color: white;
+}
