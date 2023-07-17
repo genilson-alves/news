@@ -38,13 +38,11 @@
 
 main {
   margin: 0px 50px 0px;
-  margin-bottom: 50px;
 }
 
 .weather {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 100%;
   border-bottom: 5px solid black;
 }
 
@@ -71,14 +69,6 @@ main {
   width: 60px;
 }
 
-.last-updated {
-  font-size: 15px;
-  font-style: italic;
-  text-align: center;
-  color: rgb(165, 165, 165);
-  margin: 5px 0px 5px;
-}
-
 .weather-temp {
   width: 50%;
   display: flex;
@@ -95,28 +85,29 @@ main {
   font-size: 15px;
 }
 
-.content {
-  display: flex;
-  margin-top: 50px;
-  height: 100%;
+.last-updated {
+  font-size: 15px;
+  font-style: italic;
+  text-align: center;
+  color: rgb(165, 165, 165);
+  margin: 5px 0px 5px;
 }
 
-.primary-content,
-.secondary-content {
+.content {
   display: flex;
-  flex-direction: column;
-  gap: 50px;
-  padding: 10px 20px 10px;
+  margin: 100px 20px 100px;
 }
 
 .primary-content {
-  border-right: 5px solid black;
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .news {
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .news-image {
@@ -124,24 +115,47 @@ main {
 }
 
 .news-image img {
-  width: 300px;
-  height: 200px;
-  max-height: 300px;
-  max-width: 300px;
+  width: 100%;
+}
+
+.news-info a {
+  text-decoration: none;
+  color: black;
+}
+
+.news-info a:hover {
+  text-decoration: underline;
+  color: rgb(73, 73, 151);
+  transition: 0.2s;
+}
+
+.news-info p {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.news-date {
+  font-weight: bold;
+}
+
+.news-detail {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .news-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 60%;
 }
 
 .secondary-content {
   width: 30%;
-  padding: 10px 20px 10px;
-}
-
-.other-news {
-  display: flex;
-  flex-direction: column;
 }
 
 footer {
