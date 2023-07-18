@@ -7,7 +7,9 @@ const locations = {
   bra: "brasilia",
 };
 
-var news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&sortBy=popularity&pageSize=10`;
+var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&sortBy=popularity&pageSize=10`;
+
+var main_news_url = `https://newsapi.org/v2/everything?apiKey=${news_key}&language=en&sortBy=relevancy&q=sport&pageSize=10`;
 
 Object.values(locations).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
@@ -25,10 +27,9 @@ Object.values(locations).forEach((location) => {
   );
 });
 
-fetch(news_url).then((response) =>
+fetch(main_news_url).then((response) =>
   response.json().then((response) => {
     response.articles.forEach((article) => {
-      console.log(article);
       creatingNews(
         article.title,
         article.url,
@@ -42,6 +43,14 @@ fetch(news_url).then((response) =>
   })
 );
 
+fetch(side_news_url).then((response) =>
+  response.json().then((response) => {
+    response.articles.forEach((article) => {
+      creatingSecondaryNews(article.title, article.url);
+    });
+  })
+);
+
 const creatingNews = (title, link, detail, author, source, date, image_url) => {
   var news = document.createElement("div");
   var news_image = document.createElement("div");
@@ -49,11 +58,12 @@ const creatingNews = (title, link, detail, author, source, date, image_url) => {
   var news_information = document.createElement("div");
   var news_information_div1 = document.createElement("div");
   var news_information_div2 = document.createElement("div");
-  var news_info_h2 = document.createElement("h2");
   var news_info_a = document.createElement("a");
   var news_info_p = document.createElement("p");
   var news_detail_span1 = document.createElement("span");
   var news_detail_span2 = document.createElement("span");
+  var news_detail_span3 = document.createElement("span");
+  var news_detail_span4 = document.createElement("span");
 
   news.className = "news";
   news_image.className = "news-image";
@@ -63,27 +73,43 @@ const creatingNews = (title, link, detail, author, source, date, image_url) => {
   news_information.className = "news-information";
   news_information_div1.className = "news-info";
   news_information_div2.className = "news-detail";
+  news_detail_span1.className = "news-detail-source";
 
   news_info_a.href = link;
-  news_info_a.textContent = title;
+  news_info_a.target = "_blank";
+  news_info_a.textContent = `${title.split(" - ")[0]}`;
   news_info_p.textContent = detail;
-  news_detail_span1.textContent = author
-    ? `${author},\n from ${source}.`
+  news_detail_span3.textContent = author
+    ? `${author.split(",", 2)}, `
     : `${source}`;
-  news_detail_span2.textContent = `Date: ${date}`;
+  news_detail_span4.textContent = author ? `from ${source}` : "";
+  news_detail_span2.textContent = `Date: ${date.slice(0, 10)}`;
 
   document.querySelector(".primary-content").appendChild(news);
   news.appendChild(news_image);
   news_image.appendChild(news_img);
   news.appendChild(news_information);
-  news_info_h2.appendChild(news_info_a);
-  news_information_div1.appendChild(news_info_h2);
   news_information_div1.appendChild(news_info_a);
   news_information_div1.appendChild(news_info_p);
   news_information_div2.appendChild(news_detail_span1);
+  news_detail_span1.appendChild(news_detail_span3);
+  news_detail_span1.appendChild(news_detail_span4);
   news_information_div2.appendChild(news_detail_span2);
   news_information.appendChild(news_information_div1);
   news_information.appendChild(news_information_div2);
+
+  document.querySelector(".news-image").style.height =
+    document.querySelector(".news-information").offsetHeight;
+};
+
+const creatingSecondaryNews = (title, newsURL) => {
+  secondaryNews = document.createElement("a");
+
+  secondaryNews.textContent = `- ${title}`;
+  secondaryNews.href = newsURL;
+  secondaryNews.target = "_blank";
+
+  document.querySelector(".secondary-content-info").appendChild(secondaryNews);
 };
 
 const creatingWeather = (

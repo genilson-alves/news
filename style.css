@@ -4,6 +4,14 @@
   font-family: "Oswald", sans-serif;
 }
 
+:root {
+  --purple: #494997;
+  --navigation-background: #fec5bb;
+  --main-background: #ffffff;
+  --content-background: #f8edeb;
+  --footer-background: #fec5bb;
+}
+
 .logo {
   font-size: 50px;
   text-decoration: none;
@@ -19,6 +27,7 @@
   padding: 30px 50px 30px;
   margin: 0px 50px 0px;
   border-bottom: 5px solid black;
+  background-color: var(--navigation-background);
 }
 
 .navigation ul {
@@ -38,12 +47,14 @@
 
 main {
   margin: 0px 50px 0px;
+  background-color: var(--main-background);
 }
 
 .weather {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border-bottom: 5px solid black;
+  padding: 10px 0px 10px;
 }
 
 .city {
@@ -103,6 +114,9 @@ main {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  border-radius: 50px;
+  padding: 30px;
+  background-color: var(--content-background);
 }
 
 .news {
@@ -116,22 +130,32 @@ main {
 
 .news-image img {
   width: 100%;
+  height: 100%;
+  border-radius: 25px;
 }
 
 .news-info a {
   text-decoration: none;
   color: black;
+  font-size: 1.5em;
+  margin-bottom: 0.83em;
+  font-weight: bold;
 }
 
 .news-info a:hover {
   text-decoration: underline;
-  color: rgb(73, 73, 151);
+  color: var(--purple);
   transition: 0.2s;
 }
 
 .news-info p {
   font-size: 18px;
   font-style: italic;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .news-date {
@@ -147,6 +171,10 @@ main {
   margin-bottom: 10px;
 }
 
+.news-detail-source span {
+  display: block;
+}
+
 .news-information {
   display: flex;
   flex-direction: column;
@@ -156,6 +184,32 @@ main {
 
 .secondary-content {
   width: 30%;
+  padding: 20px;
+  height: 900px;
+  margin-left: 20px;
+  border-radius: 50px;
+  background-color: var(--content-background);
+}
+
+.secondary-content-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.secondary-content a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.secondary-content a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+  transition: 0.3s;
 }
 
 footer {
@@ -164,6 +218,7 @@ footer {
   border-top: 5px solid black;
   margin: 0px 50px 0px;
   padding: 20px;
+  background-color: var(--footer-background);
 }
 
 footer ul {
