@@ -7,9 +7,9 @@ const locations = {
   bra: "brasilia",
 };
 
-var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&sortBy=popularity&pageSize=10`;
+var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&category=general&country=us&pageSize=10`;
 
-var main_news_url = `https://newsapi.org/v2/everything?apiKey=${news_key}&language=en&sortBy=relevancy&q=sport&pageSize=10`;
+var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=br&pageSize=10`;
 
 Object.values(locations).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
@@ -27,21 +27,24 @@ Object.values(locations).forEach((location) => {
   );
 });
 
-fetch(main_news_url).then((response) =>
-  response.json().then((response) => {
-    response.articles.forEach((article) => {
-      creatingNews(
-        article.title,
-        article.url,
-        article.description,
-        article.author,
-        article.source.name,
-        article.publishedAt,
-        article.urlToImage
-      );
-    });
-  })
-);
+const fetchingContent = (type) => {
+  main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&category=${type}&country=us&pageSize=10`;
+  fetch(main_news_url).then((response) =>
+    response.json().then((response) => {
+      response.articles.forEach((article) => {
+        creatingNews(
+          article.title,
+          article.url,
+          article.description,
+          article.author,
+          article.source.name,
+          article.publishedAt,
+          article.urlToImage
+        );
+      });
+    })
+  );
+};
 
 fetch(side_news_url).then((response) =>
   response.json().then((response) => {
@@ -105,7 +108,7 @@ const creatingNews = (title, link, detail, author, source, date, image_url) => {
 const creatingSecondaryNews = (title, newsURL) => {
   secondaryNews = document.createElement("a");
 
-  secondaryNews.textContent = `- ${title}`;
+  secondaryNews.textContent = `- ${title.split(" - ")[0]}`;
   secondaryNews.href = newsURL;
   secondaryNews.target = "_blank";
 
