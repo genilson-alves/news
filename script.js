@@ -6,10 +6,8 @@ const locations = {
   rj: "rio+de+janeiro",
   bra: "brasilia",
 };
-
-var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&category=general&country=us&pageSize=10`;
-
 var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=br&pageSize=10`;
+var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&pageSize=10`;
 
 Object.values(locations).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
@@ -27,24 +25,21 @@ Object.values(locations).forEach((location) => {
   );
 });
 
-const fetchingContent = (type) => {
-  main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&category=${type}&country=us&pageSize=10`;
-  fetch(main_news_url).then((response) =>
-    response.json().then((response) => {
-      response.articles.forEach((article) => {
-        creatingNews(
-          article.title,
-          article.url,
-          article.description,
-          article.author,
-          article.source.name,
-          article.publishedAt,
-          article.urlToImage
-        );
-      });
-    })
-  );
-};
+fetch(main_news_url).then((response) =>
+  response.json().then((response) => {
+    response.articles.forEach((article) => {
+      creatingNews(
+        article.title,
+        article.url,
+        article.description,
+        article.author,
+        article.source.name,
+        article.publishedAt,
+        article.urlToImage
+      );
+    });
+  })
+);
 
 fetch(side_news_url).then((response) =>
   response.json().then((response) => {
