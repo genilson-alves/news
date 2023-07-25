@@ -2,17 +2,19 @@ const weather_key = "e455787a22054869bc9135812231107";
 const news_key = "63a367487cc34c29955def57d90267d2";
 const locations = {
   ip: "auto:ip",
-  sp: "sao+paulo",
-  rj: "rio+de+janeiro",
-  bra: "brasilia",
+  sp: "-23.533773,-46.625290",
+  rj: "-22.908333,-43.196388",
+  bra: "-15.793889,-47.882778",
 };
 var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=br&pageSize=10`;
-var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&pageSize=10`;
+var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&pageSize=14`;
+var moeda = `https://economia.awesomeapi.com.br/last/USD-BRL`;
 
 Object.values(locations).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
   fetch(weather_url).then((response) =>
     response.json().then((response) => {
+      console.log(response);
       creatingWeather(
         response.location.name,
         response.current.temp_c,
@@ -27,6 +29,13 @@ Object.values(locations).forEach((location) => {
 
 fetch(main_news_url).then((response) =>
   response.json().then((response) => {
+    creatingMain(
+      response.articles[0],
+      response.articles[1],
+      response.articles[2],
+      response.articles[3]
+    );
+    response.articles.splice(0, 4);
     response.articles.forEach((article) => {
       creatingNews(
         article.title,
@@ -48,6 +57,35 @@ fetch(side_news_url).then((response) =>
     });
   })
 );
+
+// fetch(moeda).then((response) =>
+//   response.json().then((response) => {
+//     console.log(response);
+//   })
+// );
+
+const creatingMain = (col_1, col_2, col_3, col_4) => {
+  document.querySelector(".col-1 > img").src = col_1.urlToImage;
+  document.querySelector(".col-1 > a").textContent = `${
+    col_1.title.split(" - ")[0]
+  }`;
+  document.querySelector(".col-1 > a").href = col_1.url;
+  document.querySelector(".col-3 > img").src = col_2.urlToImage;
+  document.querySelector(".col-3 > a").textContent = `${
+    col_2.title.split(" - ")[0]
+  }`;
+  document.querySelector(".col-3 > a").href = col_2.url;
+  document.querySelector(".col-4 > img").src = col_3.urlToImage;
+  document.querySelector(".col-4 > a").textContent = `${
+    col_3.title.split(" - ")[0]
+  }`;
+  document.querySelector(".col-4 > a").href = col_3.url;
+  document.querySelector(".col-5 > img").src = col_4.urlToImage;
+  document.querySelector(".col-5 > a").textContent = `${
+    col_4.title.split(" - ")[0]
+  }`;
+  document.querySelector(".col-5 > a").href = col_4.url;
+};
 
 const creatingNews = (title, link, detail, author, source, date, image_url) => {
   var news = document.createElement("div");

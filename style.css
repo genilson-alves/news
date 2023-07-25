@@ -110,33 +110,52 @@ main {
 }
 
 .col-1 {
-  width: 61%;
+  flex: 2;
 }
 
 .col-2 {
-  width: 39%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.col-1,
+.row-1 {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
 .col-3,
 .col-4 {
+  flex: 1;
+}
+
+.col-5 {
+  flex: 1;
+}
+
+.col-1,
+.col-3,
+.col-4,
+.col-5 {
   position: relative;
   text-align: center;
 }
 
 .col-1 img,
 .col-3 img,
-.col-4 img {
+.col-4 img,
+.col-5 img {
   width: 100%;
+  height: 100%;
   border-radius: 25px;
 }
 
 .col-1 a,
 .col-3 a,
-.col-4 a {
+.col-4 a,
+.col-5 a {
   position: absolute;
   bottom: 8px;
   left: 16px;
@@ -148,7 +167,8 @@ main {
 
 .col-1 a:hover,
 .col-3 a:hover,
-.col-4 a:hover {
+.col-4 a:hover,
+.col-5 a:hover {
   text-decoration: underline;
   transition: 0.2s;
 }
@@ -157,25 +177,21 @@ main {
   font-size: 30px;
 }
 
-.col-4 a {
+.col-5 a {
   font-size: 20px;
-}
-
-.row-1 {
-  display: flex;
-  gap: 10px;
 }
 
 .content {
   display: flex;
+  gap: 20px;
   margin: 30px 0px 50px;
 }
 
 .primary-content {
-  width: 70%;
+  flex: 3;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   border-radius: 50px;
   padding: 30px;
 }
@@ -277,8 +293,7 @@ main {
 }
 
 .secondary-content {
-  width: 30%;
-  margin-left: 20px;
+  flex: 1;
 }
 
 .secondary-content-info {
@@ -303,6 +318,23 @@ main {
   color: var(--purple);
   text-decoration: underline;
   transition: 0.3s;
+}
+
+.cotacao {
+  margin-top: 50px;
+}
+
+.dolar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  gap: 5px;
+}
+
+.ask {
+  font-size: 4em;
 }
 
 footer {
