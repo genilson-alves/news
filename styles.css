@@ -321,20 +321,34 @@ main {
 }
 
 .cotacao {
-  margin-top: 50px;
-}
-
-.dolar {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border-radius: 40px;
-  gap: 5px;
+  margin-top: 30px;
 }
 
-.ask {
-  font-size: 4em;
+.coin-table {
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.coin-table th {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.coin-table td {
+  text-align: center;
+  padding: 2px;
+}
+
+.coin-table th,
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+.coin-table th {
+  padding: 10px;
 }
 
 footer {

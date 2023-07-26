@@ -8,35 +8,34 @@ const locations = {
 };
 var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=br&pageSize=10`;
 var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&pageSize=14`;
-var moeda = `https://economia.awesomeapi.com.br/last/USD-BRL`;
+var moeda = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
 
 Object.values(locations).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
   fetch(weather_url).then((response) =>
-    response.json().then((response) => {
-      console.log(response);
+    response.json().then((data) => {
       creatingWeather(
-        response.location.name,
-        response.current.temp_c,
-        response.current.condition.text,
-        response.current.feelslike_c,
-        response.current.condition.icon,
-        response.current.last_updated
+        data.location.name,
+        data.current.temp_c,
+        data.current.condition.text,
+        data.current.feelslike_c,
+        data.current.condition.icon,
+        data.current.last_updated
       );
     })
   );
 });
 
 fetch(main_news_url).then((response) =>
-  response.json().then((response) => {
+  response.json().then((data) => {
     creatingMain(
-      response.articles[0],
-      response.articles[1],
-      response.articles[2],
-      response.articles[3]
+      data.articles[0],
+      data.articles[1],
+      data.articles[2],
+      data.articles[3]
     );
-    response.articles.splice(0, 4);
-    response.articles.forEach((article) => {
+    data.articles.splice(0, 4);
+    data.articles.forEach((article) => {
       creatingNews(
         article.title,
         article.url,
@@ -51,18 +50,37 @@ fetch(main_news_url).then((response) =>
 );
 
 fetch(side_news_url).then((response) =>
-  response.json().then((response) => {
-    response.articles.forEach((article) => {
+  response.json().then((data) => {
+    data.articles.forEach((article) => {
       creatingSecondaryNews(article.title, article.url);
     });
   })
 );
 
-// fetch(moeda).then((response) =>
-//   response.json().then((response) => {
-//     console.log(response);
-//   })
-// );
+fetch(moeda).then((response) =>
+  response.json().then((data) => {
+    Object.values(data).forEach((coin) => {
+      creatingMarket(coin.name, coin.ask, coin.create_date);
+    });
+  })
+);
+
+const creatingMarket = (code, ask, updated) => {
+  const tr = document.createElement("tr");
+  const td_1 = document.createElement("td");
+  const td_2 = document.createElement("td");
+  const td_3 = document.createElement("td");
+
+  tr.appendChild(td_1);
+  tr.appendChild(td_2);
+  tr.appendChild(td_3);
+
+  td_1.textContent = `${code.split("/")[0]}`;
+  td_2.textContent = `R$${ask.slice(0, 4)}`;
+  td_3.textContent = updated.slice(10);
+
+  document.querySelector(".coin-table").appendChild(tr);
+};
 
 const creatingMain = (col_1, col_2, col_3, col_4) => {
   document.querySelector(".col-1 > img").src = col_1.urlToImage;
