@@ -21,7 +21,24 @@
       </ul>
     </nav>
     <main>
-      <div class="weather"></div>
+      <div class="weather" data-weather-container>
+        <template data-weather-template>
+          <div>
+            <div class="city" data-weather-city></div>
+            <div class="weather-info">
+              <div class="weather-icon">
+                <img src="" data-weather-image>
+                <span data-weather-current></span>
+              </div>
+              <div class="weather-temp">
+                <span class="temp" data-weather-temperature></span>
+                <span class="feels-like" data-weather-feels></span>
+              </div>
+            </div>
+            <div class="last-updated" data-weather-updated></div>
+          </div>
+        </template>
+      </div>
       <div class="main-news">
         <div class="col-1">
           <img alt="news-image">
@@ -45,8 +62,28 @@
         </div>
       </div>
       <div class="content">
-        <div class="primary-content">
+        <div class="primary-content" data-news-container>
           <div class="part-title">NEWS</div>
+          <template data-news-template>
+            <div class="news">
+              <div class="news-image">
+                <img src="" data-news-image>
+              </div>
+              <div class="news-information">
+                <div class="news-info">
+                  <a href="" target="_blank" data-news-title></a>
+                  <p data-news-description></p>
+                </div>
+                <div class="news-detail">
+                  <span class="news-detail-source">
+                    <span data-news-author></span>
+                    <span data-news-source></span>
+                  </span>
+                  <span data-news-date></span>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
         <div class="secondary-content">
           <div class="trending">
