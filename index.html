@@ -14,64 +14,68 @@
     <title>News</title>
   </head>
   <body>
-    <nav class="navigation">
-      <div><a class="logo" href="#">News</a></div>
+    <nav class="navigation">  
+      <div>
+        <a class="logo" href="#">News</a>
+      </div>
       <ul>
-        <li><a href="#">Search</a></li>
+        <li>
+          <a href="#">Search</a>
+        </li>
       </ul>
     </nav>
     <main>
       <div class="weather" data-weather-container>
         <template data-weather-template>
           <div>
-            <div class="city" data-weather-city></div>
-            <div class="weather-info">
+            <div class="weather-city" data-weather-city></div>
+            <div class="weather-current">
               <div class="weather-icon">
-                <img src="" data-weather-image>
+                <img alt="weather-image" data-weather-image>
                 <span data-weather-current></span>
               </div>
-              <div class="weather-temp">
-                <span class="temp" data-weather-temperature></span>
+              <div class="weather-temperature">
+                <span class="temperature" data-weather-temperature></span>
                 <span class="feels-like" data-weather-feels></span>
               </div>
             </div>
-            <div class="last-updated" data-weather-updated></div>
+            <div class="weather-updated" data-weather-updated></div>
           </div>
         </template>
       </div>
       <div class="main-news">
-        <div class="col-1">
-          <img alt="news-image">
-          <a target="_blank"></a>
+        <div class="main-col-1">
+          <img alt="news-image" class="main-news-image" data-main-image0>
+          <a target="_blank" class="main-news-title" data-main-title0></a>
         </div>
-        <div class="col-2">
+        <div class="main-col-2">
           <div class="row-1">
-            <div class="col-3">
-              <img alt="news-image">
-              <a target="_blank"></a>
+            <div class="main-col-3">
+              <img alt="news-image" class="main-news-image" data-main-image1>
+              <a target="_blank" class="main-news-title" data-main-title1></a>
             </div>
-            <div class="col-4">
-              <img alt="news-image">
-              <a target="_blank"></a>
+            <div class="main-col-4">
+              <img alt="news-image" class="main-news-image" data-main-image2>
+              <a target="_blank" class="main-news-title" data-main-title2></a>
             </div>
           </div>
-          <div class="col-5">
-            <img alt="news-image">
-            <a target="_blank"></a>
+          <div class="main-col-5">
+            <img alt="news-image" class="main-news-image" data-main-image3>
+            <a target="_blank" class="main-news-title" data-main-title3></a>
           </div>
         </div>
       </div>
       <div class="content">
-        <div class="primary-content" data-news-container>
+        <div class="main-content" data-news-container>
           <div class="part-title">NEWS</div>
           <template data-news-template>
             <div class="news">
               <div class="news-image">
-                <img src="" data-news-image>
+                <img alt="news-image" data-news-image>
               </div>
               <div class="news-information">
                 <div class="news-info">
-                  <a href="" target="_blank" data-news-title></a>
+                  <a target="_blank" data-news-title></a>
                   <p data-news-description></p>
                 </div>
                 <div class="news-detail">
@@ -85,20 +89,26 @@
             </div>
           </template>
         </div>
-        <div class="secondary-content">
+        <div class="sidebar-content">
           <div class="trending">
             <div class="part-title">TRENDING IN BRAZIL</div>
-            <div class="secondary-content-info">
-            </div>
+            <div class="trending-news"></div>
           </div>
           <div class="cotacao">
             <div class="part-title">MARKET</div>
-              <table class="coin-table">
+              <table class="coin-table" data-market-container>
                 <tr>
                   <th>NAME</th>
                   <th>PRICE</th>
                   <th>UPDATED</th>
                 </tr>
+                <template data-market-template>
+                  <tr>
+                    <td data-market-name>A</td>
+                    <td data-market-price>B</td>
+                    <td data-market-updated>C</td>
+                  </tr>
+                </template>
               </table>
           </div>
         </div>

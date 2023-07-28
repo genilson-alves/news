@@ -1,42 +1,62 @@
-const weather_key = "e455787a22054869bc9135812231107";
-const news_key = "63a367487cc34c29955def57d90267d2";
-const locations = {
+const weather_api_key = "e455787a22054869bc9135812231107";
+const news_api_key = "63a367487cc34c29955def57d90267d2";
+const weather_cities = {
   ip: "auto:ip",
   sp: "-23.533773,-46.625290",
   rj: "-22.908333,-43.196388",
   bra: "-15.793889,-47.882778",
 };
-var side_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=br&pageSize=10`;
-var main_news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_key}&country=us&pageSize=14`;
-var moeda = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
-
-const newsTemplate = document.querySelector("[data-news-template]");
-const newsContainer = document.querySelector("[data-news-container]");
-
+var news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=us&pageSize=14`;
+var trending_brazil_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=br&pageSize=10`;
+var market_api_url = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
+const news_container = document.querySelector("[data-news-container]");
+const news_template = document.querySelector("[data-news-template]");
 const weather_container = document.querySelector("[data-weather-container]");
 const weather_template = document.querySelector("[data-weather-template]");
+const market_container = document.querySelector("[data-market-container]");
+const market_template = document.querySelector("[data-market-template]");
 
-Object.values(locations).forEach((location) => {
-  var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_key}&q=${location}&lang=pt`;
+Object.values(weather_cities).forEach((location) => {
+  var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
   fetch(weather_url).then((response) =>
     response.json().then((data) => {
       const weather = weather_template.content.cloneNode(true).children[0];
       const weather_city = weather.querySelector("[data-weather-city]");
-      const weather_image = weather.querySelector("[data-weather-city]");
+      const weather_image = weather.querySelector("[data-weather-image]");
       const weather_current = weather.querySelector("[data-weather-current]");
       const weather_temperature = weather.querySelector(
         "[data-weather-temperature]"
       );
       const weather_feels = weather.querySelector("[data-weather-feels]");
-      const weather_updated = weather.querySelector("[data-weather-updatd]");
+      const weather_updated = weather.querySelector("[data-weather-updated]");
+
+      weather_city.textContent = `${data.location.name}`;
+      weather_image.src = `https:${data.current.condition.icon}`;
+      weather_current.textContent = data.current.condition.text;
+      weather_temperature.textContent = `${Math.round(data.current.temp_c)}°`;
+      weather_feels.textContent = `Feels Like: ${Math.round(
+        data.current.feelslike_c
+      )}°`;
+      weather_updated.textContent = `Last Updated: ${data.current.last_updated}`;
+
+      weather_container.append(weather);
     })
   );
 });
 
-fetch(main_news_url).then((response) =>
+fetch(news_url).then((response) =>
   response.json().then((data) => {
+    for (let i = 0; i < 4; i++) {
+      document.querySelector(`[data-main-image${i}]`).src =
+        data.articles[i].urlToImage;
+      document.querySelector(`[data-main-title${i}]`).href =
+        data.articles[i].url;
+      document.querySelector(`[data-main-title${i}]`).textContent =
+        data.articles[i].title;
+    }
+    data.articles.splice(0, 4);
     data.articles.forEach((article) => {
-      const news = newsTemplate.content.cloneNode(true).children[0];
+      const news = news_template.content.cloneNode(true).children[0];
       const news_image = news.querySelector("[data-news-image]");
       const news_title = news.querySelector("[data-news-title]");
       const news_description = news.querySelector("[data-news-description]");
@@ -56,121 +76,38 @@ fetch(main_news_url).then((response) =>
         : "";
       news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
 
-      newsContainer.append(news);
+      news_container.append(news);
     });
   })
 );
 
-// fetch(side_news_url).then((response) =>
-//   response.json().then((data) => {
-//     data.articles.forEach((article) => {
-//       creatingSecondaryNews(article.title, article.url);
-//     });
-//   })
-// );
+fetch(trending_brazil_url).then((response) =>
+  response.json().then((data) => {
+    data.articles.forEach((article) => {
+      const trending = document.createElement("a");
 
-// fetch(moeda).then((response) =>
-//   response.json().then((data) => {
-//     Object.values(data).forEach((coin) => {
-//       creatingMarket(coin.name, coin.ask, coin.create_date);
-//     });
-//   })
-// );
+      trending.textContent = `- ${article.title.split(" - ")[0]}`;
+      trending.href = article.url;
+      trending.target = "_blank";
 
-// const creatingMarket = (code, ask, updated) => {
-//   const tr = document.createElement("tr");
-//   const td_1 = document.createElement("td");
-//   const td_2 = document.createElement("td");
-//   const td_3 = document.createElement("td");
+      document.querySelector(".trending-news").append(trending);
+    });
+  })
+);
 
-//   tr.appendChild(td_1);
-//   tr.appendChild(td_2);
-//   tr.appendChild(td_3);
+fetch(market_api_url).then((response) =>
+  response.json().then((data) => {
+    Object.values(data).forEach((value) => {
+      const market = market_template.content.cloneNode(true).children[0];
+      const market_name = market.querySelector("[data-market-name]");
+      const market_price = market.querySelector("[data-market-price]");
+      const market_updated = market.querySelector("[data-market-updated]");
 
-//   td_1.textContent = `${code.split("/")[0]}`;
-//   td_2.textContent = `R$${ask.slice(0, 4)}`;
-//   td_3.textContent = updated.slice(10);
+      market_name.textContent = `${value.name.split("/")[0]}`;
+      market_price.textContent = `R$${value.ask.slice(0, 4)}`;
+      market_updated.textContent = value.create_date.slice(10);
 
-//   document.querySelector(".coin-table").appendChild(tr);
-// };
-
-// const creatingMain = (col_1, col_2, col_3, col_4) => {
-//   document.querySelector(".col-1 > img").src = col_1.urlToImage;
-//   document.querySelector(".col-1 > a").textContent = `${
-//     col_1.title.split(" - ")[0]
-//   }`;
-//   document.querySelector(".col-1 > a").href = col_1.url;
-//   document.querySelector(".col-3 > img").src = col_2.urlToImage;
-//   document.querySelector(".col-3 > a").textContent = `${
-//     col_2.title.split(" - ")[0]
-//   }`;
-//   document.querySelector(".col-3 > a").href = col_2.url;
-//   document.querySelector(".col-4 > img").src = col_3.urlToImage;
-//   document.querySelector(".col-4 > a").textContent = `${
-//     col_3.title.split(" - ")[0]
-//   }`;
-//   document.querySelector(".col-4 > a").href = col_3.url;
-//   document.querySelector(".col-5 > img").src = col_4.urlToImage;
-//   document.querySelector(".col-5 > a").textContent = `${
-//     col_4.title.split(" - ")[0]
-//   }`;
-//   document.querySelector(".col-5 > a").href = col_4.url;
-// };
-
-// const creatingSecondaryNews = (title, newsURL) => {
-//   secondaryNews = document.createElement("a");
-
-//   secondaryNews.textContent = `- ${title.split(" - ")[0]}`;
-//   secondaryNews.href = newsURL;
-//   secondaryNews.target = "_blank";
-
-//   document.querySelector(".secondary-content-info").appendChild(secondaryNews);
-// };
-
-const creatingWeather = (
-  city,
-  temperature,
-  condition,
-  feels_like,
-  weather_image_url,
-  last_updated
-) => {
-  var weather_div = document.createElement("div");
-  var weather_city = document.createElement("div");
-  var weather_info = document.createElement("div");
-  var weather_icon = document.createElement("div");
-  var weather_icon_image = document.createElement("img");
-  var weather_icon_span = document.createElement("span");
-  var weather_temp = document.createElement("div");
-  var weather_temp_span_temp = document.createElement("span");
-  var weather_temp_span_feels = document.createElement("span");
-  var weather_last_updated = document.createElement("div");
-
-  weather_city.className = "city";
-  weather_info.className = "weather-info";
-  weather_icon.className = "weather-icon";
-  weather_temp.className = "weather-temp";
-  weather_temp_span_temp.className = "temp";
-  weather_temp_span_feels.className = "feels-like";
-  weather_last_updated.className = "last-updated";
-
-  weather_city.textContent = `${city}`;
-  weather_icon_image.src = `https:${weather_image_url}`;
-  weather_icon_span.textContent = condition;
-  weather_temp_span_temp.textContent = `${Math.round(temperature)}°`;
-  weather_temp_span_feels.textContent = `Feels Like: ${Math.round(
-    feels_like
-  )}°`;
-  weather_last_updated.textContent = `Last Updated: ${last_updated}`;
-
-  weather_icon.appendChild(weather_icon_image);
-  weather_icon.appendChild(weather_icon_span);
-  weather_temp.appendChild(weather_temp_span_temp);
-  weather_temp.appendChild(weather_temp_span_feels);
-  weather_info.appendChild(weather_icon);
-  weather_info.appendChild(weather_temp);
-  weather_div.appendChild(weather_city);
-  weather_div.appendChild(weather_info);
-  weather_div.appendChild(weather_last_updated);
-  document.querySelector(".weather").appendChild(weather_div);
-};
+      market_container.append(market);
+    });
+  })
+);

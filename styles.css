@@ -50,19 +50,22 @@ main {
 }
 
 .weather {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   border-bottom: 5px solid black;
   padding: 10px 0px 10px;
 }
 
-.city {
+.weather div {
+  flex: 1;
+}
+
+.weather-city {
   width: 100%;
   text-align: center;
   margin: 5px 0px 0px;
 }
 
-.weather-info {
+.weather-current {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,21 +75,19 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
 }
 
 .weather-icon img {
-  width: 60px;
+  min-width: 60px;
 }
 
-.weather-temp {
-  width: 50%;
+.weather-temperature {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.temp {
+.temperature {
   font-size: 60px;
 }
 
@@ -95,7 +96,7 @@ main {
   font-size: 15px;
 }
 
-.last-updated {
+.weather-updated {
   font-size: 15px;
   font-style: italic;
   text-align: center;
@@ -109,53 +110,41 @@ main {
   margin-top: 20px;
 }
 
-.col-1 {
+.main-col-1 {
   flex: 2;
+  position: relative;
+  text-align: center;
 }
 
-.col-2 {
-  flex: 1;
+.main-col-2 {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 10px;
 }
 
 .row-1 {
   display: flex;
   gap: 10px;
-  flex: 1;
 }
 
-.col-3,
-.col-4 {
+.main-col-2,
+.row-1,
+.main-col-3,
+.main-col-4,
+.main-col-5 {
   flex: 1;
-}
-
-.col-5 {
-  flex: 1;
-}
-
-.col-1,
-.col-3,
-.col-4,
-.col-5 {
   position: relative;
   text-align: center;
 }
 
-.col-1 img,
-.col-3 img,
-.col-4 img,
-.col-5 img {
+.main-news-image {
   width: 100%;
   height: 100%;
   border-radius: 25px;
 }
 
-.col-1 a,
-.col-3 a,
-.col-4 a,
-.col-5 a {
+.main-news-title {
   position: absolute;
   bottom: 8px;
   left: 16px;
@@ -165,19 +154,16 @@ main {
   font-weight: bold;
 }
 
-.col-1 a:hover,
-.col-3 a:hover,
-.col-4 a:hover,
-.col-5 a:hover {
+.main-news-title:hover {
   text-decoration: underline;
   transition: 0.2s;
 }
 
-.col-1 a {
+.main-col-1 a {
   font-size: 30px;
 }
 
-.col-5 a {
+.main-col-5 a {
   font-size: 20px;
 }
 
@@ -187,7 +173,7 @@ main {
   margin: 30px 0px 50px;
 }
 
-.primary-content {
+.main-content {
   flex: 3;
   display: flex;
   flex-direction: column;
@@ -292,11 +278,11 @@ main {
   width: 60%;
 }
 
-.secondary-content {
+.sidebar-content {
   flex: 1;
 }
 
-.secondary-content-info {
+.trending-news {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -307,14 +293,14 @@ main {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.secondary-content a {
+.sidebar-content a {
   text-decoration: none;
   color: black;
   font-weight: bold;
   font-style: italic;
 }
 
-.secondary-content a:hover {
+.sidebar-content a:hover {
   color: var(--purple);
   text-decoration: underline;
   transition: 0.3s;
