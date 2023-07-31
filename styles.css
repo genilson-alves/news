@@ -13,9 +13,15 @@
 }
 
 .logo {
-  font-size: 50px;
+  font-size: 3rem;
   text-decoration: none;
   color: black;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
 }
 
 .navigation {
@@ -23,7 +29,7 @@
   font-weight: bold;
   justify-content: space-between;
   align-items: center;
-  font-size: 30px;
+  font-size: 2rem;
   padding: 30px 50px 30px;
   margin: 0px 50px 0px;
   border-bottom: 5px solid black;
@@ -31,18 +37,32 @@
 }
 
 .navigation ul {
-  display: flex;
-  gap: 40px;
   list-style: none;
 }
 
-.navigation ul li a {
-  text-decoration: none;
-  color: black;
+.search-wrapper {
+  display: flex;
+  padding: 10px;
+  height: 40px;
 }
 
-.navigation ul li a:hover {
-  text-decoration: underline;
+.search-wrapper input {
+  padding: 15px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.search-wrapper a {
+  border: none;
+  background-color: rgb(218, 218, 218);
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  padding: 10px;
 }
 
 main {
@@ -52,7 +72,7 @@ main {
 .weather {
   display: flex;
   border-bottom: 5px solid black;
-  padding: 10px 0px 10px;
+  padding: 10px 0px;
 }
 
 .weather div {
@@ -60,9 +80,7 @@ main {
 }
 
 .weather-city {
-  width: 100%;
   text-align: center;
-  margin: 5px 0px 0px;
 }
 
 .weather-current {
@@ -78,7 +96,7 @@ main {
 }
 
 .weather-icon img {
-  min-width: 60px;
+  max-width: 64px;
 }
 
 .weather-temperature {
@@ -88,16 +106,15 @@ main {
 }
 
 .temperature {
-  font-size: 60px;
+  font-size: 4rem;
 }
 
 .feels-like {
   font-style: italic;
-  font-size: 15px;
 }
 
 .weather-updated {
-  font-size: 15px;
+  font-size: 0.9rem;
   font-style: italic;
   text-align: center;
   color: rgb(165, 165, 165);
@@ -107,7 +124,7 @@ main {
 .main-news {
   display: flex;
   gap: 10px;
-  margin-top: 20px;
+  margin: 20px 0px 20px;
 }
 
 .main-col-1 {
@@ -119,17 +136,16 @@ main {
 .main-col-2 {
   display: flex;
   flex-direction: column;
-  flex: 1;
   gap: 10px;
 }
 
-.row-1 {
+.main-row-1 {
   display: flex;
   gap: 10px;
 }
 
 .main-col-2,
-.row-1,
+.main-row-1,
 .main-col-3,
 .main-col-4,
 .main-col-5 {
@@ -139,7 +155,7 @@ main {
 }
 
 .main-news-image {
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   border-radius: 25px;
 }
@@ -156,7 +172,6 @@ main {
 
 .main-news-title:hover {
   text-decoration: underline;
-  transition: 0.2s;
 }
 
 .main-col-1 a {
@@ -170,23 +185,14 @@ main {
 .content {
   display: flex;
   gap: 20px;
-  margin: 30px 0px 50px;
 }
 
 .main-content {
-  flex: 3;
   display: flex;
   flex-direction: column;
+  flex: 3;
   gap: 20px;
-  border-radius: 50px;
-  padding: 30px;
-}
-
-.part-title {
-  font-weight: bold;
-  font-size: 40px;
-  width: 100%;
-  text-align: center;
+  padding: 20px;
 }
 
 .news {
@@ -194,34 +200,8 @@ main {
   gap: 20px;
 }
 
-.news-categories {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.categories-button {
-  width: 100%;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  border-radius: 15px;
-  border: 2px solid black;
-  cursor: pointer;
-}
-
-.categories-button:hover {
-  transition: 0.5s;
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
 .news-image {
-  width: 40%;
+  flex: 2;
 }
 
 .news-image img {
@@ -230,27 +210,35 @@ main {
   border-radius: 25px;
 }
 
+.news-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  flex: 3;
+}
+
 .news-info a {
   text-decoration: none;
   color: black;
-  font-size: 1.5em;
-  margin-bottom: 0.83em;
+  font-size: 1.5rem;
+  margin-bottom: 0.9rem;
   font-weight: bold;
 }
 
 .news-info a:hover {
   text-decoration: underline;
   color: var(--purple);
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .news-info p {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-style: italic;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   line-clamp: 2;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -259,23 +247,15 @@ main {
 }
 
 .news-detail {
-  font-weight: bold;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  font-weight: bold;
   align-items: center;
   margin-bottom: 10px;
 }
 
 .news-detail-source span {
   display: block;
-}
-
-.news-information {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 60%;
 }
 
 .sidebar-content {
@@ -286,11 +266,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: var(--content-background);
-  border-radius: 50px;
-  padding: 20px;
-  height: 900px;
+  border-radius: 40px;
+  padding: 30px;
+  min-height: 900px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: var(--content-background);
 }
 
 .sidebar-content a {
@@ -306,34 +286,33 @@ main {
   transition: 0.3s;
 }
 
-.cotacao {
+.sidebar-market {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-top: 30px;
+  margin: 10px 0px;
 }
 
-.coin-table {
-  margin-top: 10px;
+.market-table {
+  margin: 5px;
   border-collapse: collapse;
 }
 
-.coin-table th {
+.market-table th {
   background-color: #04aa6d;
   color: white;
 }
 
-.coin-table td {
+.market-table td {
   text-align: center;
-  padding: 2px;
+  padding: 3px;
 }
 
-.coin-table th,
+.market-table th,
 td {
   border-bottom: 1px solid #ddd;
 }
 
-.coin-table th {
+.market-table th {
   padding: 10px;
 }
 

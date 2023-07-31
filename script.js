@@ -51,8 +51,9 @@ fetch(news_url).then((response) =>
         data.articles[i].urlToImage;
       document.querySelector(`[data-main-title${i}]`).href =
         data.articles[i].url;
-      document.querySelector(`[data-main-title${i}]`).textContent =
-        data.articles[i].title;
+      document.querySelector(`[data-main-title${i}]`).textContent = `${
+        data.articles[i].title.split(" - ")[0]
+      }`;
     }
     data.articles.splice(0, 4);
     data.articles.forEach((article) => {
