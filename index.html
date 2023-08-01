@@ -21,8 +21,8 @@
       <ul>
         <li>
           <div class="search-wrapper">
-            <input type="search" id="search" data-search>
-            <a onclick="searchButton()" href="./pages/search.html">Search</a>  
+            <input class="search-bar" type="search" id="search" data-search>
+            <input class="search-button" type="button" value="search" onclick="searchButton()"/>
           </div>
         </li>
       </ul>
@@ -107,9 +107,9 @@
               </tr>
               <template data-market-template>
                 <tr>
-                  <td data-market-name>A</td>
-                  <td data-market-price>B</td>
-                  <td data-market-updated>C</td>
+                  <td data-market-name></td>
+                  <td data-market-price></td>
+                  <td data-market-updated></td>
                 </tr>
               </template>
             </table>
@@ -138,7 +138,6 @@
           <li>
             <a href="https://www.weatherapi.com/docs/" target="_blank">API Documentation</a>
           </li>
-
         </ul>
       </div>
       </div>
@@ -156,5 +155,6 @@
       </div>
     </footer>
   </body>
-  <script src="script.js" defer ></script>
+  <script src="scripts.js" defer ></script>
+  <script src="search.js" defer ></script>
 </html>

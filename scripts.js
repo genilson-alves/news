@@ -4,17 +4,27 @@ const weather_cities = {
   ip: "auto:ip",
   sp: "-23.533773,-46.625290",
   rj: "-22.908333,-43.196388",
-  bra: "-15.793889,-47.882778",
+  df: "-15.793889,-47.882778",
 };
-var news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=us&pageSize=14`;
-var trending_brazil_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=br&pageSize=10`;
-var market_api_url = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
+const news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=us&pageSize=14`;
+const trending_brazil_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=br&pageSize=10`;
+const market_api_url = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
 const news_container = document.querySelector("[data-news-container]");
 const news_template = document.querySelector("[data-news-template]");
 const weather_container = document.querySelector("[data-weather-container]");
 const weather_template = document.querySelector("[data-weather-template]");
 const market_container = document.querySelector("[data-market-container]");
 const market_template = document.querySelector("[data-market-template]");
+var search_link = ``;
+
+const searchButton = () => {
+  const value = document.querySelector("[data-search]").value;
+  search_link = `https://newsapi.org/v2/everything?q=${value}&sortBy=publishedAt&pageSize=10&apiKey=${news_api_key}`;
+  if (search_link && value) {
+    location.href = "search.html";
+    console.log(search_link);
+  }
+};
 
 Object.values(weather_cities).forEach((location) => {
   var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
