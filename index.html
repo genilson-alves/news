@@ -13,16 +13,17 @@
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <title>News</title>
   </head>
-  <body>
+  <body class="index_body">
+    <a onclick="topButton()" class="topButton" data-top-button title="Go to top"></a>
     <nav class="navigation">  
       <div>
-        <a class="logo" href="#">News</a>
+        <a class="logo" href="#" title="News">News</a>
       </div>
       <ul>
         <li>
           <div class="search-wrapper">
             <input class="search-bar" type="search" id="search" data-search>
-            <input class="search-button" type="button" value="search" onclick="searchButton()"/>
+            <input class="search-button" type="button" value="search" data-search-button/ title="Search">
           </div>
         </li>
       </ul>
@@ -48,22 +49,22 @@
       </div>
       <div class="main-news">
         <div class="main-col-1">
-          <img alt="news-image" class="main-news-image" data-main-image0>
+          <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image0>
           <a target="_blank" class="main-news-title" data-main-title0></a>
         </div>
         <div class="main-col-2">
           <div class="main-row-1">
             <div class="main-col-3">
-              <img alt="news-image" class="main-news-image" data-main-image1>
-              <a target="_blank" class="main-news-title" data-main-title1></a>
+              <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image1>
+              <a target="_blank" class="main-news-title" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-title1></a>
             </div>
             <div class="main-col-4">
-              <img alt="news-image" class="main-news-image" data-main-image2>
+              <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image2>
               <a target="_blank" class="main-news-title" data-main-title2></a>
             </div>
           </div>
           <div class="main-col-5">
-            <img alt="news-image" class="main-news-image" data-main-image3>
+            <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image3>
             <a target="_blank" class="main-news-title" data-main-title3></a>
           </div>
         </div>
@@ -74,7 +75,7 @@
           <template data-news-template>
             <div class="news">
               <div class="news-image">
-                <img alt="news-image" data-news-image>
+                <img alt="news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-news-image>
               </div>
               <div class="news-information">
                 <div class="news-info">
@@ -156,5 +157,4 @@
     </footer>
   </body>
   <script src="scripts.js" defer ></script>
-  <script src="search.js" defer ></script>
 </html>

@@ -15,82 +15,57 @@ const weather_container = document.querySelector("[data-weather-container]");
 const weather_template = document.querySelector("[data-weather-template]");
 const market_container = document.querySelector("[data-market-container]");
 const market_template = document.querySelector("[data-market-template]");
-var search_link = ``;
+const search_input = document.querySelector("[data-search]");
+const search_button = document.querySelector("[data-search-button]");
+// const top_button = document.querySelector("[data-top-button]");
 
-const searchButton = () => {
-  const value = document.querySelector("[data-search]").value;
-  search_link = `https://newsapi.org/v2/everything?q=${value}&sortBy=publishedAt&pageSize=10&apiKey=${news_api_key}`;
-  if (search_link && value) {
-    location.href = "search.html";
-    console.log(search_link);
+// window.scroll(function () {
+//   if (window.scrollTop() > 300) {
+//     top_button.addClass("show");
+//   } else {
+//     top_button.removeClass("show");
+//   }
+// });
+
+// top_button.on("click", function (e) {
+//   e.preventDefault();
+//   $("html, body").animate({ scrollTop: 0 }, "300");
+// });
+
+// window.onscroll = function () {
+//   scrollFunction();
+// };
+
+// function scrollFunction() {
+//   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+//     top_button.style.display = "block";
+//   } else {
+//     top_button.style.display = "none";
+//   }
+// }
+
+// function topButton() {
+//   document.body.scrollTop = 0;
+//   document.documentElement.scrollTop = 0;
+// }
+
+search_input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    search_button.click();
   }
-};
-
-Object.values(weather_cities).forEach((location) => {
-  var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
-  fetch(weather_url).then((response) =>
-    response.json().then((data) => {
-      const weather = weather_template.content.cloneNode(true).children[0];
-      const weather_city = weather.querySelector("[data-weather-city]");
-      const weather_image = weather.querySelector("[data-weather-image]");
-      const weather_current = weather.querySelector("[data-weather-current]");
-      const weather_temperature = weather.querySelector(
-        "[data-weather-temperature]"
-      );
-      const weather_feels = weather.querySelector("[data-weather-feels]");
-      const weather_updated = weather.querySelector("[data-weather-updated]");
-
-      weather_city.textContent = `${data.location.name}`;
-      weather_image.src = `https:${data.current.condition.icon}`;
-      weather_current.textContent = data.current.condition.text;
-      weather_temperature.textContent = `${Math.round(data.current.temp_c)}°`;
-      weather_feels.textContent = `Feels Like: ${Math.round(
-        data.current.feelslike_c
-      )}°`;
-      weather_updated.textContent = `Last Updated: ${data.current.last_updated}`;
-
-      weather_container.append(weather);
-    })
-  );
 });
 
-fetch(news_url).then((response) =>
-  response.json().then((data) => {
-    for (let i = 0; i < 4; i++) {
-      document.querySelector(`[data-main-image${i}]`).src =
-        data.articles[i].urlToImage;
-      document.querySelector(`[data-main-title${i}]`).href =
-        data.articles[i].url;
-      document.querySelector(`[data-main-title${i}]`).textContent = `${
-        data.articles[i].title.split(" - ")[0]
-      }`;
-    }
-    data.articles.splice(0, 4);
-    data.articles.forEach((article) => {
-      const news = news_template.content.cloneNode(true).children[0];
-      const news_image = news.querySelector("[data-news-image]");
-      const news_title = news.querySelector("[data-news-title]");
-      const news_description = news.querySelector("[data-news-description]");
-      const news_author = news.querySelector("[data-news-author]");
-      const news_source = news.querySelector("[data-news-source]");
-      const news_date = news.querySelector("[data-news-date]");
-
-      news_image.src = article.urlToImage;
-      news_title.href = article.url;
-      news_title.textContent = `${article.title.split(" - ")[0]}`;
-      news_description.textContent = article.description;
-      news_author.textContent = article.author
-        ? `${article.author.split(",", 2)}, `
-        : `${article.source.name}`;
-      news_source.textContent = article.author
-        ? `from ${article.source.name}`
-        : "";
-      news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
-
-      news_container.append(news);
-    });
-  })
-);
+search_button.addEventListener("click", () => {
+  const value = document.querySelector("[data-search]").value;
+  if (value) {
+    window.location = "search.html";
+    localStorage.setItem(
+      "search_link",
+      `https://newsapi.org/v2/everything?q=${value}&pageSize=10&apiKey=${news_api_key}`
+    );
+  }
+});
 
 fetch(trending_brazil_url).then((response) =>
   response.json().then((data) => {
@@ -122,3 +97,106 @@ fetch(market_api_url).then((response) =>
     });
   })
 );
+
+if (document.URL.includes("index.html")) {
+  Object.values(weather_cities).forEach((location) => {
+    var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
+    fetch(weather_url).then((response) =>
+      response.json().then((data) => {
+        const weather = weather_template.content.cloneNode(true).children[0];
+        const weather_city = weather.querySelector("[data-weather-city]");
+        const weather_image = weather.querySelector("[data-weather-image]");
+        const weather_current = weather.querySelector("[data-weather-current]");
+        const weather_temperature = weather.querySelector(
+          "[data-weather-temperature]"
+        );
+        const weather_feels = weather.querySelector("[data-weather-feels]");
+        const weather_updated = weather.querySelector("[data-weather-updated]");
+
+        weather_city.textContent = `${data.location.name}`;
+        weather_image.src = `https:${data.current.condition.icon}`;
+        weather_current.textContent = data.current.condition.text;
+        weather_temperature.textContent = `${Math.round(data.current.temp_c)}°`;
+        weather_feels.textContent = `Feels Like: ${Math.round(
+          data.current.feelslike_c
+        )}°`;
+        weather_updated.textContent = `Last Updated: ${data.current.last_updated}`;
+
+        weather_container.append(weather);
+      })
+    );
+  });
+
+  fetch(news_url).then((response) =>
+    response.json().then((data) => {
+      for (let i = 0; i < 4; i++) {
+        document.querySelector(`[data-main-image${i}]`).src =
+          data.articles[i].urlToImage;
+        document.querySelector(`[data-main-title${i}]`).href =
+          data.articles[i].url;
+        document.querySelector(`[data-main-title${i}]`).textContent = `${
+          data.articles[i].title.split(" - ")[0]
+        }`;
+      }
+      data.articles.splice(0, 4);
+      data.articles.forEach((article) => {
+        const news = news_template.content.cloneNode(true).children[0];
+        const news_image = news.querySelector("[data-news-image]");
+        const news_title = news.querySelector("[data-news-title]");
+        const news_description = news.querySelector("[data-news-description]");
+        const news_author = news.querySelector("[data-news-author]");
+        const news_source = news.querySelector("[data-news-source]");
+        const news_date = news.querySelector("[data-news-date]");
+
+        news_image.src = article.urlToImage;
+        news_title.href = article.url;
+        news_title.textContent = `${article.title.split(" - ")[0]}`;
+        news_description.textContent = article.description;
+        news_author.textContent = article.author
+          ? `${article.author.split(",", 2)}, `
+          : `${article.source.name}`;
+        news_source.textContent = article.author
+          ? `from ${article.source.name}`
+          : "";
+        news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
+
+        news_container.append(news);
+      });
+    })
+  );
+}
+
+if (document.URL.includes("search.html")) {
+  var search_link = localStorage.getItem("search_link");
+  if (search_link) {
+    fetch(search_link).then((response) =>
+      response.json().then((data) => {
+        data.articles.forEach((article) => {
+          const news = news_template.content.cloneNode(true).children[0];
+          const news_image = news.querySelector("[data-news-image]");
+          const news_title = news.querySelector("[data-news-title]");
+          const news_description = news.querySelector(
+            "[data-news-description]"
+          );
+          const news_author = news.querySelector("[data-news-author]");
+          const news_source = news.querySelector("[data-news-source]");
+          const news_date = news.querySelector("[data-news-date]");
+
+          news_image.src = article.urlToImage;
+          news_title.href = article.url;
+          news_title.textContent = `${article.title.split(" - ")[0]}`;
+          news_description.textContent = article.description;
+          news_author.textContent = article.author
+            ? `${article.author.split(",", 2)}, `
+            : `${article.source.name}`;
+          news_source.textContent = article.author
+            ? `from ${article.source.name}`
+            : "";
+          news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
+
+          news_container.append(news);
+        });
+      })
+    );
+  }
+}
