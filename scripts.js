@@ -17,37 +17,24 @@ const market_container = document.querySelector("[data-market-container]");
 const market_template = document.querySelector("[data-market-template]");
 const search_input = document.querySelector("[data-search]");
 const search_button = document.querySelector("[data-search-button]");
-// const top_button = document.querySelector("[data-top-button]");
+const top_button = document.querySelector("[data-top]");
 
-// window.scroll(function () {
-//   if (window.scrollTop() > 300) {
-//     top_button.addClass("show");
-//   } else {
-//     top_button.removeClass("show");
-//   }
-// });
+window.onscroll = function () {
+  scrollFunction();
+};
 
-// top_button.on("click", function (e) {
-//   e.preventDefault();
-//   $("html, body").animate({ scrollTop: 0 }, "300");
-// });
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    top_button.style.display = "block";
+  } else {
+    top_button.style.display = "none";
+  }
+}
 
-// window.onscroll = function () {
-//   scrollFunction();
-// };
-
-// function scrollFunction() {
-//   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-//     top_button.style.display = "block";
-//   } else {
-//     top_button.style.display = "none";
-//   }
-// }
-
-// function topButton() {
-//   document.body.scrollTop = 0;
-//   document.documentElement.scrollTop = 0;
-// }
+function goTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 
 search_input.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
@@ -129,38 +116,40 @@ if (document.URL.includes("index.html")) {
 
   fetch(news_url).then((response) =>
     response.json().then((data) => {
-      for (let i = 0; i < 4; i++) {
-        document.querySelector(`[data-main-image${i}]`).src =
-          data.articles[i].urlToImage;
-        document.querySelector(`[data-main-title${i}]`).href =
-          data.articles[i].url;
-        document.querySelector(`[data-main-title${i}]`).textContent = `${
-          data.articles[i].title.split(" - ")[0]
-        }`;
-      }
-      data.articles.splice(0, 4);
-      data.articles.forEach((article) => {
-        const news = news_template.content.cloneNode(true).children[0];
-        const news_image = news.querySelector("[data-news-image]");
-        const news_title = news.querySelector("[data-news-title]");
-        const news_description = news.querySelector("[data-news-description]");
-        const news_author = news.querySelector("[data-news-author]");
-        const news_source = news.querySelector("[data-news-source]");
-        const news_date = news.querySelector("[data-news-date]");
+      data.articles.forEach((article, index) => {
+        if (index < 4 && window.innerWidth > 769) {
+          document.querySelector(`[data-main-image${index}]`).src =
+            data.articles[index].urlToImage;
+          document.querySelector(`[data-main-title${index}]`).href =
+            data.articles[index].url;
+          document.querySelector(`[data-main-title${index}]`).textContent = `${
+            data.articles[index].title.split(" - ")[0]
+          }`;
+        } else {
+          const news = news_template.content.cloneNode(true).children[0];
+          const news_image = news.querySelector("[data-news-image]");
+          const news_title = news.querySelector("[data-news-title]");
+          const news_description = news.querySelector(
+            "[data-news-description]"
+          );
+          const news_author = news.querySelector("[data-news-author]");
+          const news_source = news.querySelector("[data-news-source]");
+          const news_date = news.querySelector("[data-news-date]");
 
-        news_image.src = article.urlToImage;
-        news_title.href = article.url;
-        news_title.textContent = `${article.title.split(" - ")[0]}`;
-        news_description.textContent = article.description;
-        news_author.textContent = article.author
-          ? `${article.author.split(",", 2)}, `
-          : `${article.source.name}`;
-        news_source.textContent = article.author
-          ? `from ${article.source.name}`
-          : "";
-        news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
+          news_image.src = article.urlToImage;
+          news_title.href = article.url;
+          news_title.textContent = `${article.title.split(" - ")[0]}`;
+          news_description.textContent = article.description;
+          news_author.textContent = article.author
+            ? `${article.author.split(",", 2)}, `
+            : `${article.source.name}`;
+          news_source.textContent = article.author
+            ? `from ${article.source.name}`
+            : "";
+          news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
 
-        news_container.append(news);
+          news_container.append(news);
+        }
       });
     })
   );

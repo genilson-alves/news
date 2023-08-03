@@ -14,16 +14,38 @@
     <title>News</title>
   </head>
   <body class="index_body">
-    <a onclick="topButton()" class="topButton" data-top-button title="Go to top"></a>
-    <nav class="navigation">  
+    <a onclick="goTop()" class="go_top" data-top title="Go to top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="1em"
+        viewBox="0 0 512 512"
+      >
+        <style>
+          svg {
+            fill: #ffffff;
+          }
+        </style>
+        <path
+          d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+        />
+      </svg>
+    </a>
+    <nav class="navigation" data-navigation>
       <div>
         <a class="logo" href="#" title="News">News</a>
       </div>
       <ul>
         <li>
           <div class="search-wrapper">
-            <input class="search-bar" type="search" id="search" data-search>
-            <input class="search-button" type="button" value="search" data-search-button/ title="Search">
+            <input class="search-bar" type="search" id="search" data-search />
+            <input
+              class="search-button"
+              type="image"
+              src="search.svg"
+              width="20px"
+              data-search-button
+              title="Search"
+            />
           </div>
         </li>
       </ul>
@@ -35,7 +57,7 @@
             <div class="weather-city" data-weather-city></div>
             <div class="weather-current">
               <div class="weather-icon">
-                <img alt="weather-image" data-weather-image>
+                <img alt="weather-image" data-weather-image />
                 <span data-weather-current></span>
               </div>
               <div class="weather-temperature">
@@ -49,22 +71,47 @@
       </div>
       <div class="main-news">
         <div class="main-col-1">
-          <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image0>
+          <img
+            alt="news-image"
+            class="main-news-image"
+            onerror="this.onerror=null;this.src='no_image.jpg'"
+            data-main-image0
+          />
           <a target="_blank" class="main-news-title" data-main-title0></a>
         </div>
         <div class="main-col-2">
           <div class="main-row-1">
             <div class="main-col-3">
-              <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image1>
-              <a target="_blank" class="main-news-title" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-title1></a>
+              <img
+                alt="news-image"
+                class="main-news-image"
+                onerror="this.onerror=null;this.src='no_image.jpg'"
+                data-main-image1
+              />
+              <a
+                target="_blank"
+                class="main-news-title"
+                onerror="this.onerror=null;this.src='no_image.jpg'"
+                data-main-title1
+              ></a>
             </div>
             <div class="main-col-4">
-              <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image2>
+              <img
+                alt="news-image"
+                class="main-news-image"
+                onerror="this.onerror=null;this.src='no_image.jpg'"
+                data-main-image2
+              />
               <a target="_blank" class="main-news-title" data-main-title2></a>
             </div>
           </div>
           <div class="main-col-5">
-            <img alt="news-image" class="main-news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-main-image3>
+            <img
+              alt="news-image"
+              class="main-news-image"
+              onerror="this.onerror=null;this.src='no_image.jpg'"
+              data-main-image3
+            />
             <a target="_blank" class="main-news-title" data-main-title3></a>
           </div>
         </div>
@@ -75,7 +122,11 @@
           <template data-news-template>
             <div class="news">
               <div class="news-image">
-                <img alt="news-image" onerror="this.onerror=null;this.src='no_image.jpg'" data-news-image>
+                <img
+                  alt="news-image"
+                  onerror="this.onerror=null;this.src='no_image.jpg'"
+                  data-news-image
+                />
               </div>
               <div class="news-information">
                 <div class="news-info">
@@ -119,28 +170,20 @@
       </div>
     </main>
     <footer>
-      <div class="contact-me">
-        <ul>
-          <h3>Contato</h3>
-          <li>
-            <a href="https://github.com/genilson-alves" target="_blank">GitHub</a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/genilson-alves0/" target="_blank">LinkedIn</a>
-          </li>
-        </ul>
-      </div>    
       <div class="weather-api">
         <ul>
           <h3>Weather API</h3>
           <li>
-            <a href="https://www.weatherapi.com/" target="_blank">API Website</a>
+            <a href="https://www.weatherapi.com/" target="_blank"
+              >API Website</a
+            >
           </li>
           <li>
-            <a href="https://www.weatherapi.com/docs/" target="_blank">API Documentation</a>
+            <a href="https://www.weatherapi.com/docs/" target="_blank"
+              >API Documentation</a
+            >
           </li>
         </ul>
-      </div>
       </div>
       <div class="news-api">
         <ul>
@@ -149,12 +192,13 @@
             <a href="https://newsapi.org/" target="_blank">API Website</a>
           </li>
           <li>
-            <a href="https://newsapi.org/docs" target="_blank">API Documentaion</a>
+            <a href="https://newsapi.org/docs" target="_blank"
+              >API Documentaion</a
+            >
           </li>
         </ul>
       </div>
-      </div>
     </footer>
   </body>
-  <script src="scripts.js" defer ></script>
+  <script src="scripts.js" defer></script>
 </html>
