@@ -19,7 +19,163 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
+.go_top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.hamburguer,
+.close-button {
+  display: none;
+}
+
+.logo {
+  font-size: 3rem;
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.navigation {
+  display: flex;
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 30px 50px 30px;
+  margin: 0px 50px 0px;
+  border-bottom: 5px solid black;
+  background-color: var(--navigation-background);
+}
+
+.navigation ul {
+  list-style: none;
+}
+
+main {
+  margin: 0px 50px 0px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 5px solid black;
+  margin: 0px 50px 0px;
+  padding: 20px;
+  background-color: var(--footer-background);
+}
+
+footer ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+footer ul li a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 320px) and (max-width: 768px) {
+  .hamburguer,
+  .close-button {
+    display: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hamburguer {
+    background-color: var(--navigation-background);
+  }
+
+  .hamburguer img {
+    width: 30px;
+  }
+
+  .close-button {
+    background-color: black;
+  }
+
+  .close-button img {
+    width: 20px;
+  }
+
+  .logo-container {
+    display: flex;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin-top: -500%;
+    background-color: black;
+    animation-duration: 1s;
+    z-index: 2;
+  }
+
+  .navigation-links {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+
+  .navigation-links:hover {
+    text-decoration: underline;
+  }
+
+  @keyframes showSidebar {
+    from {
+      margin-top: -500%;
+    }
+    to {
+      margin-top: 0%;
+    }
+  }
+
+  .search-wrapper {
+    display: none;
+  }
+
+  .title {
+    display: none;
+  }
+
   .weather {
     display: none;
   }
@@ -106,6 +262,30 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+  .search-wrapper {
+    display: flex;
+  }
+
+  .search-bar {
+    border: none;
+    outline: none;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .search-button {
+    border: none;
+    background-color: rgb(218, 218, 218);
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
   .weather {
     display: flex;
     border-bottom: 5px solid black;
@@ -304,6 +484,30 @@ input[type="search"]::-webkit-search-results-decoration {
     margin: auto;
   }
 
+  .search-wrapper {
+    display: flex;
+  }
+
+  .search-bar {
+    border: none;
+    outline: none;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .search-button {
+    border: none;
+    background-color: rgb(218, 218, 218);
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
   .weather {
     display: flex;
     border-bottom: 5px solid black;
@@ -390,7 +594,7 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   .main-news-image {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     border-radius: 25px;
   }
@@ -401,7 +605,7 @@ input[type="search"]::-webkit-search-results-decoration {
     left: 16px;
     color: white;
     text-decoration: none;
-    padding: 5px;
+    padding: 10px;
     font-weight: bold;
   }
 
@@ -550,101 +754,4 @@ input[type="search"]::-webkit-search-results-decoration {
   .market-table th {
     padding: 10px;
   }
-}
-
-.go_top {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  background-color: black;
-  color: white;
-  padding: 10px;
-  outline: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.logo {
-  font-size: 3rem;
-  text-decoration: none;
-  color: black;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 3rem;
-  text-align: center;
-}
-
-.navigation {
-  display: flex;
-  font-weight: bold;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2rem;
-  padding: 30px 50px 30px;
-  margin: 0px 50px 0px;
-  border-bottom: 5px solid black;
-  background-color: var(--navigation-background);
-}
-
-.navigation ul {
-  list-style: none;
-}
-
-.search-wrapper {
-  display: flex;
-}
-
-.search-bar {
-  border: none;
-  outline: none;
-  padding-left: 15px;
-  font-size: 1.5rem;
-  border-radius: 10px 0px 0px 10px;
-}
-
-.search-button {
-  border: none;
-  background-color: rgb(218, 218, 218);
-  border-radius: 0px 10px 10px 0px;
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  padding: 10px;
-}
-
-main {
-  margin: 0px 50px 0px;
-}
-
-footer {
-  display: flex;
-  justify-content: space-evenly;
-  border-top: 5px solid black;
-  margin: 0px 50px 0px;
-  padding: 20px;
-  background-color: var(--footer-background);
-}
-
-footer ul {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  list-style: none;
-}
-
-footer ul li a {
-  text-decoration: none;
-  color: black;
-}
-
-footer ul li a:hover {
-  text-decoration: underline;
 }

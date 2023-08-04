@@ -116,40 +116,40 @@ if (document.URL.includes("index.html")) {
 
   fetch(news_url).then((response) =>
     response.json().then((data) => {
-      data.articles.forEach((article, index) => {
-        if (index < 4 && window.innerWidth > 769) {
-          document.querySelector(`[data-main-image${index}]`).src =
-            data.articles[index].urlToImage;
-          document.querySelector(`[data-main-title${index}]`).href =
-            data.articles[index].url;
-          document.querySelector(`[data-main-title${index}]`).textContent = `${
-            data.articles[index].title.split(" - ")[0]
+      if (window.innerWidth > 769) {
+        for (var i = 0; i < 4; i++) {
+          document.querySelector(`[data-main-image${i}]`).src =
+            data.articles[i].urlToImage;
+          document.querySelector(`[data-main-title${i}]`).href =
+            data.articles[i].url;
+          document.querySelector(`[data-main-title${i}]`).textContent = `${
+            data.articles[i].title.split(" - ")[0]
           }`;
-        } else {
-          const news = news_template.content.cloneNode(true).children[0];
-          const news_image = news.querySelector("[data-news-image]");
-          const news_title = news.querySelector("[data-news-title]");
-          const news_description = news.querySelector(
-            "[data-news-description]"
-          );
-          const news_author = news.querySelector("[data-news-author]");
-          const news_source = news.querySelector("[data-news-source]");
-          const news_date = news.querySelector("[data-news-date]");
-
-          news_image.src = article.urlToImage;
-          news_title.href = article.url;
-          news_title.textContent = `${article.title.split(" - ")[0]}`;
-          news_description.textContent = article.description;
-          news_author.textContent = article.author
-            ? `${article.author.split(",", 2)}, `
-            : `${article.source.name}`;
-          news_source.textContent = article.author
-            ? `from ${article.source.name}`
-            : "";
-          news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
-
-          news_container.append(news);
         }
+        data.articles.splice(0, 4);
+      }
+      data.articles.forEach((article) => {
+        const news = news_template.content.cloneNode(true).children[0];
+        const news_image = news.querySelector("[data-news-image]");
+        const news_title = news.querySelector("[data-news-title]");
+        const news_description = news.querySelector("[data-news-description]");
+        const news_author = news.querySelector("[data-news-author]");
+        const news_source = news.querySelector("[data-news-source]");
+        const news_date = news.querySelector("[data-news-date]");
+
+        news_image.src = article.urlToImage;
+        news_title.href = article.url;
+        news_title.textContent = `${article.title.split(" - ")[0]}`;
+        news_description.textContent = article.description;
+        news_author.textContent = article.author
+          ? `${article.author.split(",", 2)}, `
+          : `${article.source.name}`;
+        news_source.textContent = article.author
+          ? `from ${article.source.name}`
+          : "";
+        news_date.textContent = `Date: ${article.publishedAt.slice(0, 10)}`;
+
+        news_container.append(news);
       });
     })
   );
@@ -189,3 +189,74 @@ if (document.URL.includes("search.html")) {
     );
   }
 }
+
+// var portfolioNavigation = document.getElementById("portfolio-navigation");
+// var navigation = document.getElementById("nav-links");
+// var content = document.getElementById("main-page");
+// var showSideBar = false;
+
+// function toggleSidebar() {
+//   showSideBar = !showSideBar;
+//   if (window.innerWidth < 769 && showSideBar) {
+//     navigation.style.marginTop = "0%";
+//     navigation.style.animationName = "showSidebar";
+//     navigation.style.position = "fixed";
+//     portfolioNavigation.style.marginTop = "0px";
+//   } else {
+//     navigation.style.marginTop = "-500%";
+//     navigation.style.animationName = "";
+//     portfolioNavigation.style.marginTop = "20px";
+//   }
+// }
+
+// window.addEventListener("resize", (event) => {
+//   if (window.innerWidth > 769 && showSideBar) {
+//     toggleSidebar();
+//   }
+// });
+
+// <nav class="portfolio-navigation" id="portfolio-navigation">
+//   <a href="#" class="logo">
+//     Eu.eu
+//   </a>
+//   <button class="hamburguer" onclick="toggleSidebar()">
+//     <img src="icons/hamburguer.svg" />
+//   </button>
+//   <ul class="nav-links" id="nav-links">
+//     <button class="close-button" onclick="toggleSidebar()">
+//       <img src="icons/x-mark-256.png" />
+//     </button>
+//     <li>
+//       <a href="#about" class="navigation-links" onclick="toggleSidebar()">
+//         Sobre
+//       </a>
+//     </li>
+//     <li>
+//       <a
+//         href="#technologies"
+//         class="navigation-links"
+//         onclick="toggleSidebar()"
+//       >
+//         Tecnologias
+//       </a>
+//     </li>
+//     <li>
+//       <a href="#projects" class="navigation-links" onclick="toggleSidebar()">
+//         Projetos
+//       </a>
+//     </li>
+//     <li>
+//       <a href="#contacts" class="navigation-links" onclick="toggleSidebar()">
+//         Contato
+//       </a>
+//     </li>
+//   </ul>
+//   <div class="navigation-contact">
+//     <a href="https://github.com/genilson-alves" target="_blank">
+//       <img src="icons/github.svg" />
+//     </a>
+//     <a href="https://www.linkedin.com/in/genilson-alves0/" target="_blank">
+//       <img src="icons/linkedin.svg" />
+//     </a>
+//   </div>
+// </nav>;
