@@ -87,7 +87,7 @@ fetch(market_api_url).then((response) =>
   })
 );
 
-if (document.URL.includes("index.html")) {
+if (document.querySelector(".index_body")) {
   Object.values(weather_cities).forEach((location) => {
     var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
     fetch(weather_url).then((response) =>
