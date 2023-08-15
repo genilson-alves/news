@@ -1,13 +1,12 @@
 const weather_api_key = "e455787a22054869bc9135812231107";
-const news_api_key = "63a367487cc34c29955def57d90267d2";
+const news_api_key = "6ba6c10ce62ef63f3e3086403faf2bdf";
 const weather_cities = {
   ip: "auto:ip",
   sp: "-23.533773,-46.625290",
   rj: "-22.908333,-43.196388",
   df: "-15.793889,-47.882778",
 };
-const news_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=us&pageSize=14`;
-const trending_brazil_url = `https://newsapi.org/v2/top-headlines?apiKey=${news_api_key}&country=br&pageSize=10`;
+
 const market_api_url = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
 const news_container = document.querySelector("[data-news-container]");
 const news_template = document.querySelector("[data-news-template]");
@@ -18,6 +17,9 @@ const market_template = document.querySelector("[data-market-template]");
 const search_input = document.querySelector("[data-search]");
 const search_button = document.querySelector("[data-search-button]");
 const top_button = document.querySelector("[data-top]");
+
+var news_url = `https://gnews.io/api/v4/top-headlines?&country=us&max=10&apikey=${news_api_key}`;
+var trending_brazil_url = `https://gnews.io/api/v4/top-headlines?&country=br&max=10&apikey=${news_api_key}`;
 
 window.onscroll = function () {
   scrollFunction();
@@ -49,7 +51,7 @@ search_button.addEventListener("click", () => {
     window.location = "search.html";
     localStorage.setItem(
       "search_link",
-      `https://newsapi.org/v2/everything?q=${value}&pageSize=20&apiKey=${news_api_key}`
+      `https://gnews.io/api/v4/top-headlines?q=${value}&apikey=${news_api_key}`
     );
   }
 });
@@ -119,7 +121,7 @@ if (document.URL.includes("index.html")) {
       if (window.innerWidth > 769) {
         for (var i = 0; i < 4; i++) {
           document.querySelector(`[data-main-image${i}]`).src =
-            data.articles[i].urlToImage;
+            data.articles[i].image;
           document.querySelector(`[data-main-title${i}]`).href =
             data.articles[i].url;
           document.querySelector(`[data-main-title${i}]`).textContent = `${
@@ -136,7 +138,7 @@ if (document.URL.includes("index.html")) {
         const news_author = news.querySelector("[data-news-author]");
         const news_source = news.querySelector("[data-news-source]");
         const news_date = news.querySelector("[data-news-date]");
-        news_image.src = article.urlToImage;
+        news_image.src = article.image;
         news_title.href = article.url;
         news_title.textContent = `${article.title.split(" - ")[0]}`;
         news_description.textContent = article.description;
@@ -169,7 +171,7 @@ if (document.URL.includes("search.html")) {
           const news_source = news.querySelector("[data-news-source]");
           const news_date = news.querySelector("[data-news-date]");
 
-          news_image.src = article.urlToImage;
+          news_image.src = article.image;
           news_title.href = article.url;
           news_title.textContent = `${article.title.split(" - ")[0]}`;
           news_description.textContent = article.description;
