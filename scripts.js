@@ -10,8 +10,6 @@ const weather_cities = {
 const market_api_url = `https://economia.awesomeapi.com.br/last/USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,GBP-BRL,CNY-BRL`;
 const news_container = document.querySelector("[data-news-container]");
 const news_template = document.querySelector("[data-news-template]");
-const weather_container = document.querySelector("[data-weather-container]");
-const weather_template = document.querySelector("[data-weather-template]");
 const market_container = document.querySelector("[data-market-container]");
 const market_template = document.querySelector("[data-market-template]");
 const search_input = document.querySelector("[data-search]");
@@ -87,8 +85,12 @@ fetch(market_api_url).then((response) =>
   })
 );
 
-if (document.URL.includes("index.html")) {
+if (document.querySelector(".index_body")) {
   Object.values(weather_cities).forEach((location) => {
+    const weather_container = document.querySelector(
+      "[data-weather-container]"
+    );
+    const weather_template = document.querySelector("[data-weather-template]");
     var weather_url = `https://api.weatherapi.com/v1/current.json?key=${weather_api_key}&q=${location}&lang=pt`;
     fetch(weather_url).then((response) =>
       response.json().then((data) => {
