@@ -18,7 +18,7 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-.go_top {
+.go-top {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -33,7 +33,7 @@ input[type="search"]::-webkit-search-results-decoration {
   border-radius: 10px;
 }
 
-.go_top svg {
+.go-top svg {
   fill: white;
 }
 
@@ -199,7 +199,7 @@ footer ul li a:hover {
     display: block;
   }
 
-  .sidebar-content {
+  .sidebar-trending {
     display: none;
   }
 }
@@ -415,7 +415,7 @@ footer ul li a:hover {
     display: block;
   }
 
-  .sidebar-content {
+  .sidebar-trending {
     display: none;
   }
 }
@@ -640,7 +640,7 @@ footer ul li a:hover {
     display: block;
   }
 
-  .sidebar-content {
+  .sidebar-trending {
     flex: 1;
   }
 
@@ -655,14 +655,14 @@ footer ul li a:hover {
     background-color: var(--content-background);
   }
 
-  .sidebar-content a {
+  .sidebar-trending a {
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-style: italic;
   }
 
-  .sidebar-content a:hover {
+  .sidebar-trending a:hover {
     color: var(--purple);
     text-decoration: underline;
     transition: 0.3s;
