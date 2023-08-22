@@ -94,7 +94,7 @@ fetch(market_url).then((response) =>
   })
 );
 
-// Fetching the weather content and showing it if the user is on main page
+// Fetching the weather content and showing it if the user is on main page.
 if (document.querySelector(".index-body")) {
   // Fetching the weather for each city in "weather_cities"
   Object.values(weather_cities).forEach((location) => {
