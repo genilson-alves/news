@@ -9,5 +9,5 @@ The page has as functions to show the trending news in USA and also in Brazil, t
 The website has as functionalities:
 * Show the trending news in USA and also in Brazil.
 * The weather in the current location of the user and also in other three capitals of Brazil.
-* Show the coin cotation of various countries converted do brazilian real. 
+* Show the coin cotation of various countries converted to brazilian real. 
 * Search for news around the world.
